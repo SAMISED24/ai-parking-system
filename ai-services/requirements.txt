@@ -1,0 +1,42 @@
+# Core dependencies
+opencv-python==4.8.1.78
+numpy==1.24.3
+Pillow==10.0.0
+
+# YOLO and object detection
+ultralytics==8.0.196
+torch==2.0.1
+torchvision==0.15.2
+
+# Image processing and computer vision
+scikit-image==0.21.0
+matplotlib==3.7.2
+
+# Machine learning and data processing
+scikit-learn==1.3.0
+pandas==2.0.3
+
+# API and web services
+flask==2.3.3
+requests==2.31.0
+
+# Chatbot and NLP
+openai==0.28.1
+transformers==4.33.2
+sentence-transformers==2.2.2
+
+# Utilities
+python-dotenv==1.0.0
+argparse
+json5==0.9.14
+tqdm==4.66.1
+
+# Database connectivity (optional for direct DB access)
+psycopg2-binary==2.9.7
+
+# Logging and monitoring
+loguru==0.7.0
+
+# Development and testing
+pytest==7.4.2
+pytest-cov==4.1.0
